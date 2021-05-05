@@ -47,7 +47,7 @@ public class Student{//} implements UserDetails {
     }
 
     public void addTopics(List<Topic> topics) {
-        topics.addAll(topics);
+        this.topics.addAll(topics);
     }
 
 

@@ -2,6 +2,7 @@ package com.epam.jap.everteacher.student;
 
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.RequiredArgsConstructor;
+import org.pmw.tinylog.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +31,16 @@ public class StudentService {
 
     public List<Student> saveAll(List<Student> students){
         return studentRepository.saveAll(students);
+    }
+
+    public Student updateTopic(String topicName,Long id) {
+        Student student = studentRepository.getById(id);
+        Logger.info("students topics before HUGE change: " + student.getTopics());
+        student.getTopics().stream()
+                .filter(topic -> topic.getName().equals(topicName))
+                .forEach(topic -> topic.setName(topicName + " done."));
+        Logger.info("students topics after HUGE change: " + student.getTopics());
+        studentRepository.save(student);
+        return student;
     }
 }

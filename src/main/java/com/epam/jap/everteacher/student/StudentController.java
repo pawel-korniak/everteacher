@@ -30,6 +30,11 @@ public class StudentController {
         return studentService.showAll(topicName);
     }
 
+    @GetMapping("update/{id}")
+    public Student updateStudent(@RequestParam String topicName,@PathVariable Long id){
+        return studentService.updateTopic(topicName,id);
+    }
+
 //    @GetMapping("addTopic")
 //    public Student addTopicToStudent(@RequestParam Long studentId,@RequestParam Long topicId){
 //        Student student = studentService.findById(studentId);
