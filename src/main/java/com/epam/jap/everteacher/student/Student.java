@@ -31,6 +31,18 @@ public class Student{//} implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "student_id",
                     referencedColumnName = "id"))
     List<Topic> topics;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name = "finishedtopic_student",
+            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"))
+    List<Topic> finishedTopics;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name = "blockedtopic_student",
+            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"))
+    List<Topic> blockedTopics;
 
     public Student(String name, String lastName) {
         this.name = name;
@@ -48,6 +60,11 @@ public class Student{//} implements UserDetails {
 
     public void addTopics(List<Topic> topics) {
         this.topics.addAll(topics);
+    }
+
+    public void markedAsFinished(Topic topic) {
+        topics.remove(topic);
+        finishedTopics.add(topic);
     }
 
 

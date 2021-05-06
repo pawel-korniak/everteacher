@@ -35,6 +35,11 @@ public class StudentController {
         return studentService.updateTopic(topicName,id);
     }
 
+    @GetMapping("finish/{id}")
+    public Student markTopicAsFinished(@RequestParam Long topicId, @PathVariable Long id) {
+        return studentService.markTopicAsFinished(topicId, id);
+    }
+
 //    @GetMapping("addTopic")
 //    public Student addTopicToStudent(@RequestParam Long studentId,@RequestParam Long topicId){
 //        Student student = studentService.findById(studentId);

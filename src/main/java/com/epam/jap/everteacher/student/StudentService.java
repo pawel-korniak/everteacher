@@ -43,4 +43,11 @@ public class StudentService {
         studentRepository.save(student);
         return student;
     }
+
+    public Student markTopicAsFinished(Long topicId, Long studentId) {
+        Student student = studentRepository.getById(studentId);
+        Topic topic = student.getTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
+        student.markedAsFinished(topic);
+        return student;
+    }
 }
