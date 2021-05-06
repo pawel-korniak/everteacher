@@ -1,5 +1,6 @@
 package com.epam.jap.everteacher.student;
 
+import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class Student{//} implements UserDetails {
     String name;
     @Column(name = "last_name")
     String lastName;
+    @OneToOne
+    Course course;
 //    String password;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name = "topic_student",
@@ -47,6 +50,7 @@ public class Student{//} implements UserDetails {
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
+        topics = course.allTopics();
 
     }
 
