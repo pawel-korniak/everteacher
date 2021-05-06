@@ -26,9 +26,8 @@ public class Topic {
 //    @ManyToMany(mappedBy = "topics",fetch = FetchType.LAZY)
 //    List<Student> students;
 
-    public Topic(String name, LocalDate deadline) {
+    public Topic(String name) {
         this.name = name;
-        this.deadline = deadline;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.epam.jap.everteacher.syllabus;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Course {
 
     @GeneratedValue
@@ -28,10 +30,11 @@ public class Course {
                     referencedColumnName = "id"))
     List<SuperTopic> superTopics;
 
-    public Course(String name, LocalDate startDate, LocalDate endDate) {
+    public Course(String name, LocalDate startDate, LocalDate endDate, List<SuperTopic> superTopics) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.superTopics = superTopics;
     }
 
     public List<Topic> allTopics() {

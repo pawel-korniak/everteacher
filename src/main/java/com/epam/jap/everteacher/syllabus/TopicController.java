@@ -16,7 +16,7 @@ public class TopicController {
         return topicService.save(topic);
     }
 
-    @GetMapping("all")
+    @GetMapping()
     public List<Topic> showAll() {
         return topicService.showAll();
     }

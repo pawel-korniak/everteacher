@@ -50,4 +50,11 @@ public class StudentService {
         student.markedAsFinished(topic);
         return studentRepository.save(student);
     }
+
+    public Student markTopicAsBlocked(Long topicId, Long studentId) {
+        Student student = studentRepository.getById(studentId);
+        Topic topic = student.getFinishedTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
+        student.markedAsBlocked(topic);
+        return studentRepository.save(student);
+    }
 }

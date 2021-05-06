@@ -1,0 +1,21 @@
+start: 2021-03-21
+end: 2021-11-21
+name: Java Academy
+syllabus:
+1. Fundamentals
+- maven
+- git
+- linux
+- java
+- testng
+- collections
+2. Junior
+- docker
+- spring
+- rest
+- mysql
+- angular
+3. Programmer
+- cloud
+- nosql
+- python
