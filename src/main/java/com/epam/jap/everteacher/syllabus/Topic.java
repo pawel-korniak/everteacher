@@ -1,13 +1,15 @@
 package com.epam.jap.everteacher.syllabus;
 
-import com.epam.jap.everteacher.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
