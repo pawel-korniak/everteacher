@@ -48,6 +48,6 @@ public class StudentService {
         Student student = studentRepository.getById(studentId);
         Topic topic = student.getTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
         student.markedAsFinished(topic);
-        return student;
+        return studentRepository.save(student);
     }
 }
