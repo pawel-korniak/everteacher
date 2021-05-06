@@ -40,6 +40,12 @@ public class StudentController {
         return studentService.markTopicAsFinished(topicId, id);
     }
 
+    @GetMapping("block/{id}")
+    public Student markTopicAsBlocked(@RequestParam Long topicId, @PathVariable Long id) {
+        return studentService.markTopicAsBlocked(topicId, id);
+    }
+
+
 //    @GetMapping("addTopic")
 //    public Student addTopicToStudent(@RequestParam Long studentId,@RequestParam Long topicId){
 //        Student student = studentService.findById(studentId);

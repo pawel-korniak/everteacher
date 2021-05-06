@@ -1,4 +1,5 @@
 package com.epam.jap.everteacher.syllabus;
 
-public class CourseParser {
+public interface CourseProvider {
+    Course provide();
 }

@@ -24,14 +24,9 @@ public class TeacherController {
         return teacherService.saveTeacher(teacher);
     }
 
-    @GetMapping("all")
+    @GetMapping()
     public List<Teacher> showAll() {
         return teacherService.findAllTeachers();
-    }
-
-    @GetMapping
-    public String hello(){
-        return "Hello Dear Guest";
     }
 
 //    @GetMapping("hello")

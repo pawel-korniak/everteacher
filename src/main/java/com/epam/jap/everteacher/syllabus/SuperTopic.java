@@ -1,11 +1,13 @@
 package com.epam.jap.everteacher.syllabus;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 @Data
 @Entity
+@NoArgsConstructor
 public class SuperTopic {
 
     @GeneratedValue
@@ -19,4 +21,9 @@ public class SuperTopic {
             inverseJoinColumns = @JoinColumn(name = "supertopic_id",
                     referencedColumnName = "id"))
     List<Topic> topicList;
+
+    public SuperTopic(String name, List<Topic> topicList) {
+        this.name = name;
+        this.topicList = topicList;
+    }
 }

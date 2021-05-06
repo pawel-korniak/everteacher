@@ -71,6 +71,11 @@ public class Student{//} implements UserDetails {
         finishedTopics.add(topic);
     }
 
+    public void markedAsBlocked(Topic topic) {
+        finishedTopics.remove(topic);
+        blockedTopics.add(topic);
+    }
+
 
     //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
