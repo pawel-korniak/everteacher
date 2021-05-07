@@ -1,5 +1,6 @@
 package com.epam.jap.everteacher.teacher;
 
+import com.epam.jap.everteacher.syllabus.Course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ public class TeacherService {
 
     final TeacherRepository teacherRepository;
 
-    Teacher saveTeacher(Teacher teacher){
+    Teacher saveTeacher(Teacher teacher) {
         return teacherRepository.save(teacher);
     }
 
@@ -19,4 +20,17 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
+    public List<Teacher> saveAll(List<Teacher> teachers) {
+        return teacherRepository.saveAll(teachers);
+    }
+
+    public void addTeachersToCourse(Course course) {
+        var list = teacherRepository.findAll();
+        list.forEach(student -> student.setCourse(course));
+        teacherRepository.saveAll(list);
+    }
+
+    public Teacher findById(Long id) {
+        return teacherRepository.findById(id).orElseThrow();
+    }
 }

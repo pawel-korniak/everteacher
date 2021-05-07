@@ -1,22 +1,18 @@
 package com.epam.jap.everteacher.teacher;
 
+import com.epam.jap.everteacher.syllabus.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "teacher")
-public class Teacher{//} implements UserDetails {
+public class Teacher {//} implements UserDetails {
 
     @GeneratedValue
     @Id
@@ -24,15 +20,23 @@ public class Teacher{//} implements UserDetails {
     String name;
     @Column(name = "last_name")
     String lastName;
-    String password;
+    @OneToOne
+    Course course;
+
+    public Teacher(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    //    String password;
 //    String role = "TEACHER";
 
 
-    public Teacher(String name, String lastName, String password) {
-        this.name = name;
-        this.lastName = lastName;
-        this.password = password;
-    }
+//    public Teacher(String name, String lastName, String password) {
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.password = password;
+//    }
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

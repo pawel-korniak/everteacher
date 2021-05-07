@@ -1,9 +1,7 @@
 package com.epam.jap.everteacher.syllabus;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +15,7 @@ import java.util.List;
 public class CourseController {
     final CourseService courseService;
 
-    @GetMapping
+    @GetMapping("all")
     public List<Course> showAll() {
         return courseService.showAll();
     }

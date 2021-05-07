@@ -17,7 +17,7 @@ public class CourseFromFile implements CourseProvider {
 
     @Override
     public Course provide() {
-       return new Course(findValueFromGivenKey("name:"), getCourseDate("start:"), getCourseDate("end:"), createTopics());
+        return new Course(findValueFromGivenKey("name:"), getCourseDate("start:"), getCourseDate("end:"), createTopics());
     }
 
     private List<SuperTopic> createTopics() {
@@ -66,6 +66,6 @@ public class CourseFromFile implements CourseProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return matchingLine.split(" ")[1];
+        return matchingLine.split(" ", 2)[1];
     }
 }

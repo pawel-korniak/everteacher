@@ -5,12 +5,9 @@ import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "student")
 @Data
-public class Student{//} implements UserDetails {
+public class Student {//} implements UserDetails {
     @GeneratedValue
     @Id
     Long id;
@@ -27,20 +24,14 @@ public class Student{//} implements UserDetails {
     String lastName;
     @OneToOne
     Course course;
-//    String password;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name = "topic_student",
-            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id",
-                    referencedColumnName = "id"))
-    List<Topic> topics;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //    String password;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "finishedtopic_student",
             joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id",
                     referencedColumnName = "id"))
     List<Topic> finishedTopics;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "blockedtopic_student",
             joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id",
@@ -50,30 +41,26 @@ public class Student{//} implements UserDetails {
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        topics = course.allTopics();
+        Logger.info("Student Constructor");
 
     }
 
-    public boolean hasTopic(String topicName) {
-        return topics.stream().anyMatch(topic -> topic.getName().equals(topicName));
-    }
-
-    public void addTopic(Topic topic){
-        topics.add(topic);
-    }
-
-    public void addTopics(List<Topic> topics) {
-        this.topics.addAll(topics);
+    public boolean hasFinishedTopic(String topicName) {
+        return finishedTopics.stream().anyMatch(topic -> topic.getName().equals(topicName));
     }
 
     public void markedAsFinished(Topic topic) {
-        topics.remove(topic);
         finishedTopics.add(topic);
     }
 
     public void markedAsBlocked(Topic topic) {
         finishedTopics.remove(topic);
         blockedTopics.add(topic);
+    }
+
+    public void unblockTopic(Topic topic) {
+        blockedTopics.remove(topic);
+        finishedTopics.add(topic);
     }
 
 
