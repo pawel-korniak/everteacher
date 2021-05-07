@@ -4,6 +4,7 @@ import com.epam.jap.everteacher.syllabus.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
 
@@ -26,6 +27,7 @@ public class Teacher {//} implements UserDetails {
     public Teacher(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
+        Logger.info("Teacher Constructor name : " + name);
     }
 
     //    String password;

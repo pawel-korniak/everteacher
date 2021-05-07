@@ -12,17 +12,17 @@ import java.util.List;
 @RestController
 @RequestMapping("course")
 @RequiredArgsConstructor
-public class CourseController {
-    final CourseService courseService;
+class CourseController {
+    private final CourseService courseService;
 
     @GetMapping("all")
-    public List<Course> showAll() {
+    List<Course> showAll() {
         return courseService.showAll();
     }
 
     @EventListener(ApplicationReadyEvent.class)
     void save() {
-        courseService.save(new CourseFromFile().provide());
+        courseService.save(CourseProvider.getProvider().provide());
     }
 
 }

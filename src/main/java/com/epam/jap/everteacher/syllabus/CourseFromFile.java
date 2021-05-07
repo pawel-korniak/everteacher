@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CourseFromFile implements CourseProvider {
-    final Path path = Paths.get("course.txt");
+class CourseFromFile implements CourseProvider {
+    private final Path path = Paths.get("course.txt");
 
     @Override
     public Course provide() {
@@ -54,12 +54,12 @@ public class CourseFromFile implements CourseProvider {
     }
 
 
-    public LocalDate getCourseDate(String key) {
+    private LocalDate getCourseDate(String key) {
         String start = findValueFromGivenKey(key);
         return LocalDate.parse(start);
     }
 
-    public String findValueFromGivenKey(String key) {
+    private String findValueFromGivenKey(String key) {
         String matchingLine = "";
         try (Stream<String> lines = Files.lines(path)) {
             matchingLine = lines.filter(s -> s.startsWith(key)).findAny().orElseThrow();

@@ -14,40 +14,40 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("teacher")
-public class TeacherController {
+class TeacherController {
 
-    final TeacherService teacherService;
-    final StudentService studentService;
-    final CourseService courseService;
+    private final TeacherService teacherService;
+    private final StudentService studentService;
+    private final CourseService courseService;
 
     @PostMapping("save")
-    public Teacher saveTeacher(@RequestBody Teacher teacher) {
+    Teacher saveTeacher(@RequestBody Teacher teacher) {
         return teacherService.saveTeacher(teacher);
     }
 
     @GetMapping("all")
-    public List<Teacher> showAllTeachers() {
+    List<Teacher> showAllTeachers() {
         return teacherService.findAllTeachers();
     }
 
     @GetMapping("allStudents")
-    public List<Student> showAll() {
+    List<Student> showAll() {
         return studentService.showAll();
     }
 
     @GetMapping("{id}")
-    public Teacher getTeacherById(@PathVariable Long id) {
+    Teacher getTeacherById(@PathVariable Long id) {
         return teacherService.findById(id);
     }
 
     @PostMapping("addStudents/{courseId}")
-    public void addStudents(@PathVariable Long courseId) {
+    void addStudents(@PathVariable Long courseId) {
         Course course = courseService.findById(courseId);
         studentService.addStudentsToCourse(course);
     }
 
     @PostMapping("addTeachers/{courseId}")
-    public void addTeachers(@PathVariable Long courseId) {
+    void addTeachers(@PathVariable Long courseId) {
         Course course = courseService.findById(courseId);
         teacherService.addTeachersToCourse(course);
     }
@@ -59,12 +59,12 @@ public class TeacherController {
     }
 
     @PostMapping("block/{studentId}")
-    public Student markTopicAsBlocked(@RequestParam Long topicId, @PathVariable Long studentId) {
+    Student markTopicAsBlocked(@RequestParam Long topicId, @PathVariable Long studentId) {
         return studentService.markTopicAsBlocked(topicId, studentId);
     }
 
     @PostMapping("unblock/{studentId}")
-    public Student unblockTopic(@RequestParam Long topicId, @PathVariable Long studentId) {
+    Student unblockTopic(@RequestParam Long topicId, @PathVariable Long studentId) {
         return studentService.unblockTopic(topicId, studentId);
     }
 

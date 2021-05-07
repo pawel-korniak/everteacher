@@ -23,9 +23,6 @@ public class Topic {
     String name;
     LocalDate deadline;
 
-//    @ManyToMany(mappedBy = "topics",fetch = FetchType.LAZY)
-//    List<Student> students;
-
     public Topic(String name) {
         this.name = name;
     }
