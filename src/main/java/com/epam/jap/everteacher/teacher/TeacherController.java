@@ -52,11 +52,11 @@ class TeacherController {
         teacherService.addTeachersToCourse(course);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-                new Teacher("Marcin", "Borek")));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+//                new Teacher("Marcin", "Borek")));
+//    }
 
     @PostMapping("block/{studentId}")
     Student markTopicAsBlocked(@RequestParam Long topicId, @PathVariable Long studentId) {

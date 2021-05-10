@@ -20,9 +20,9 @@ class CourseController {
         return courseService.showAll();
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        courseService.save(CourseProvider.getProvider().provide());
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        courseService.save(CourseProvider.getProvider().provide());
+//    }
 
 }

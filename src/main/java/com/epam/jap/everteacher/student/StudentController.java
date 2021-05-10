@@ -28,9 +28,9 @@ class StudentController {
         return studentService.markTopicAsFinished(topicId, id);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        studentService.saveAll(List.of(new Student("Nika", "Veronika"),
-                new Student("Pawel", "Pawelko")));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        studentService.saveAll(List.of(new Student("Nika", "Veronika"),
+//                new Student("Pawel", "Pawelko")));
+//    }
 }
