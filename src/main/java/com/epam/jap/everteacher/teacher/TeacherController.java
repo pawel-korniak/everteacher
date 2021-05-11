@@ -13,31 +13,26 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("teacher")
+@RequestMapping("teachers")
 class TeacherController {
 
     private final TeacherService teacherService;
     private final StudentService studentService;
     private final CourseService courseService;
 
-    @PostMapping("save")
+    @PostMapping()
     Teacher saveTeacher(@RequestBody Teacher teacher) {
         return teacherService.saveTeacher(teacher);
     }
 
-    @GetMapping("all")
+    @GetMapping()
     List<Teacher> showAllTeachers() {
         return teacherService.findAllTeachers();
     }
 
-    @GetMapping("allStudents")
-    List<Student> showAll() {
-        return studentService.showAll();
-    }
-
-    @GetMapping("{id}")
-    Teacher getTeacherById(@PathVariable Long id) {
-        return teacherService.findById(id);
+    @GetMapping("{teacherId}")
+    Teacher getTeacherById(@PathVariable Long teacherId) {
+        return teacherService.findById(teacherId);
     }
 
     @PostMapping("addStudents/{courseId}")
@@ -52,11 +47,11 @@ class TeacherController {
         teacherService.addTeachersToCourse(course);
     }
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-//                new Teacher("Marcin", "Borek")));
-//    }
+    @EventListener(ApplicationReadyEvent.class)
+    void save() {
+        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+                new Teacher("Marcin", "Borek")));
+    }
 
     @PostMapping("block/{studentId}")
     Student markTopicAsBlocked(@RequestParam Long topicId, @PathVariable Long studentId) {

@@ -16,11 +16,7 @@ public class SuperTopic {
     Long id;
     String name;
     @Column(name = "topic_list")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "topic_supertopic",
-            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "supertopic_id",
-                    referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Topic> topicList;
 
     public SuperTopic(String name, List<Topic> topicList) {

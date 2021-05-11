@@ -10,19 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("course")
+@RequestMapping("courses")
 @RequiredArgsConstructor
 class CourseController {
     private final CourseService courseService;
 
-    @GetMapping("all")
+    @GetMapping()
     List<Course> showAll() {
         return courseService.showAll();
     }
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        courseService.save(CourseProvider.getProvider().provide());
-//    }
+
+
+    @EventListener(ApplicationReadyEvent.class)
+    void save() {
+        courseService.save(CourseProvider.getProvider().provide());
+    }
 
 }

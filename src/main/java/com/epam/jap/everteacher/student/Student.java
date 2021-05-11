@@ -25,24 +25,23 @@ public class Student {//} implements UserDetails {
     @OneToOne
     Course course;
     //    String password;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "finishedtopic_student",
-            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id",
-                    referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(name = "finishedtopic_student",
+//            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id",
+//                    referencedColumnName = "id"))
     List<Topic> finishedTopics;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "blockedtopic_student",
-            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id",
-                    referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(name = "blockedtopic_student",
+//            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id",
+//                    referencedColumnName = "id"))
     List<Topic> blockedTopics;
 
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
         Logger.info("Student Constructor");
-
     }
 
     public boolean hasFinishedTopic(String topicName) {
