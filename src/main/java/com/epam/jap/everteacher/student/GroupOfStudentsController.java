@@ -8,19 +8,19 @@ import java.util.List;
 @RestController
 @RequestMapping("groups")
 @RequiredArgsConstructor
-public class GroupController {
-    private final GroupService groupService;
+public class GroupOfStudentsController {
+    private final GroupOfStudentsService groupOfStudentsService;
     private final StudentService studentService;
 
     @PostMapping("add")
-    StudentGroup addGroup(@RequestBody StudentGroup studentGroup) {
+    GroupOfStudents addGroup(@RequestBody GroupOfStudents groupOfStudents) {
 //        Group group = new Group(groupName);
-        return groupService.save(studentGroup);
+        return groupOfStudentsService.save(groupOfStudents);
     }
 
     @PostMapping("{groupId}")
-    StudentGroup addStudentsToGroup(@PathVariable Long groupId, @RequestParam List<Long> id) {
+    GroupOfStudents addStudentsToGroup(@PathVariable Long groupId, @RequestParam List<Long> id) {
         List<Student> studentList = studentService.findAllById(id);
-        return groupService.addStudents(groupId,studentList);
+        return groupOfStudentsService.addStudents(groupId,studentList);
     }
 }

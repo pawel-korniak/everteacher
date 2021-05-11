@@ -23,11 +23,7 @@ public class Course {
     @Column(name = "end_date")
     LocalDate endDate;
     @Column(name = "super_topics")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "supertopic_course",
-            joinColumns = @JoinColumn(name = "supertopic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id",
-                    referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<SuperTopic> superTopics;
 
     public Course(String name, LocalDate startDate, LocalDate endDate, List<SuperTopic> superTopics) {

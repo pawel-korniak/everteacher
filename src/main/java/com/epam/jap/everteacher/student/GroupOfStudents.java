@@ -12,19 +12,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "student_group")
-public class StudentGroup {
+public class GroupOfStudents {
     @Id
     @GeneratedValue
     Long id;
     String name;
-    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "students_group",
-            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id",
-                    referencedColumnName = "id"))
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Student> students;
 
-    public StudentGroup(String groupName) {
+    public GroupOfStudents(String groupName) {
         name = groupName;
     }
 }
