@@ -8,29 +8,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("students")
 @RequiredArgsConstructor
 class StudentController {
     private final StudentService studentService;
 
-    @PostMapping("save")
+    @PostMapping
     Student add(@RequestBody Student student) {
         return studentService.save(student);
     }
 
-    @GetMapping("{id}")
-    Student getStudentById(@PathVariable Long id) {
-        return studentService.findById(id);
+    @GetMapping()
+    List<Student> showAll() {
+        return studentService.showAll();
     }
 
-    @PostMapping("finish/{id}")
-    Student markTopicAsFinished(@RequestParam Long topicId, @PathVariable Long id) {
-        return studentService.markTopicAsFinished(topicId, id);
+    @GetMapping("{studentId}")
+    Student getStudentById(@PathVariable Long studentId) {
+        return studentService.findById(studentId);
     }
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        studentService.saveAll(List.of(new Student("Nika", "Veronika"),
-//                new Student("Pawel", "Pawelko")));
-//    }
+    @PostMapping("{studentId}/finish/{topicId}")
+    Student markTopicAsFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+        return studentService.markTopicAsFinished(studentId, topicId);
+    }
+
+
+    @EventListener(ApplicationReadyEvent.class)
+    void save() {
+        studentService.saveAll(List.of(
+                new Student("Nika", "Veronika"),
+                new Student("Pawel", "Pawelko"),
+                new Student("Pawel", "Prokop"),
+                new Student("Lukasz", "Zaba"),
+                new Student("Magdalena", "Kwiecinska"),
+                new Student("Paulina", "Ogorzalek")
+        ));
+    }
 }

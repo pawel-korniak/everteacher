@@ -42,7 +42,6 @@ public class Student {//} implements UserDetails {
         this.name = name;
         this.lastName = lastName;
         Logger.info("Student Constructor");
-
     }
 
     public boolean hasFinishedTopic(String topicName) {

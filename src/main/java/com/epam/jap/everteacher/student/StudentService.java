@@ -34,7 +34,7 @@ public class StudentService {
     }
 
 
-    public Student markTopicAsFinished(Long topicId, Long studentId) {
+    public Student markTopicAsFinished(Long studentId, Long topicId) {
         Student student = studentRepository.getById(studentId);
         Topic topic = student.getCourse().allTopics().stream()
                 .filter(t -> t.getId().equals(topicId))
@@ -44,7 +44,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student markTopicAsBlocked(Long topicId, Long studentId) {
+    public Student markTopicAsBlocked(Long studentId, Long topicId) {
         Student student = studentRepository.getById(studentId);
         Topic topic = student.getFinishedTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
         student.markedAsBlocked(topic);
@@ -62,5 +62,9 @@ public class StudentService {
         Topic topic = student.getBlockedTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
         student.unblockTopic(topic);
         return studentRepository.save(student);
+    }
+
+    public List<Student> findAllById(List<Long> id) {
+        return studentRepository.findAllById(id);
     }
 }
