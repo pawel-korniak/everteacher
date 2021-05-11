@@ -24,10 +24,9 @@ public class TeacherService {
         return teacherRepository.saveAll(teachers);
     }
 
-    public void addTeachersToCourse(Course course) {
-        var list = teacherRepository.findAll();
-        list.forEach(student -> student.setCourse(course));
-        teacherRepository.saveAll(list);
+    public Teacher signTeacherToCourse(Teacher teacher, Course course) {
+        teacher.setCourse(course);
+        return teacherRepository.save(teacher);
     }
 
     public Teacher findById(Long id) {
