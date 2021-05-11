@@ -24,18 +24,9 @@ public class Student {//} implements UserDetails {
     String lastName;
     @OneToOne
     Course course;
-    //    String password;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "finishedtopic_student",
-//            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id",
-//                    referencedColumnName = "id"))
     List<Topic> finishedTopics;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "blockedtopic_student",
-//            joinColumns = @JoinColumn(name = "topic_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id",
-//                    referencedColumnName = "id"))
     List<Topic> blockedTopics;
 
     public Student(String name, String lastName) {

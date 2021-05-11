@@ -51,13 +51,13 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public void addStudentsToCourse(Course course) {
+    public List<Student> addStudentsToCourse(Course course) {
         var list = studentRepository.findAll();
         list.forEach(student -> student.setCourse(course));
-        studentRepository.saveAll(list);
+        return studentRepository.saveAll(list);
     }
 
-    public Student unblockTopic(Long topicId, Long studentId) {
+    public Student unblockTopic(Long studentId, Long topicId) {
         Student student = studentRepository.getById(studentId);
         Topic topic = student.getBlockedTopics().stream().filter(t -> t.getId().equals(topicId)).findAny().orElseThrow();
         student.unblockTopic(topic);
