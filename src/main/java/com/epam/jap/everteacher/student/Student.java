@@ -6,8 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.pmw.tinylog.Logger;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,7 +19,8 @@ import java.util.List;
 @Entity
 @Table(name = "student")
 @Data
-public class Student {//} implements UserDetails {
+public class Student implements UserDetails {
+
     @GeneratedValue
     @Id
     Long id;
@@ -32,7 +37,14 @@ public class Student {//} implements UserDetails {
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        Logger.info("Student Constructor");
+//        Logger.info("Student Constructor : %s , %d",name );
+    }
+
+    public Student(String nika, String s, Course course) {
+
+        name = nika;
+        lastName = s;
+        this.course = course;
     }
 
     public boolean hasFinishedTopic(String topicName) {
@@ -61,42 +73,39 @@ public class Student {//} implements UserDetails {
         finishedTopics.remove(topic);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_STUDENT"));
+    }
 
+    @Override
+    public String getPassword() {
+        return lastName;
+    }
 
+    @Override
+    public String getUsername() {
+        return name;
+    }
 
-    //    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of(new SimpleGrantedAuthority("STUDENT"));
-//    }
-//
-//    @Override
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return name;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

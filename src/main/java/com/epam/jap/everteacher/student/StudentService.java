@@ -3,6 +3,7 @@ package com.epam.jap.everteacher.student;
 import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,5 +77,9 @@ public class StudentService {
 
     public List<Student> findAllById(List<Long> id) {
         return studentRepository.findAllById(id);
+    }
+
+    public UserDetails findByName(String name) {
+        return studentRepository.findByName(name);
     }
 }

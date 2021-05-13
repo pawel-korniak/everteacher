@@ -2,6 +2,7 @@ package com.epam.jap.everteacher.teacher;
 
 import com.epam.jap.everteacher.syllabus.Course;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public class TeacherService {
 
     public Teacher findById(Long id) {
         return teacherRepository.findById(id).orElseThrow();
+    }
+
+    public UserDetails findByName(String name) {
+        return teacherRepository.findByName(name);
     }
 }
