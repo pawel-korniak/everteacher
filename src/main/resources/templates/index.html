@@ -34,10 +34,55 @@
                 </summary>
            <ul class="list-group" style="list-style-type:disc;" th:each="topic: ${supertopic.getTopicList()}">
 
-               <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}+finished" th:if="${student.hasFinishedTopic(topic.name)}">
-               <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" th:unless="${student.hasFinishedTopic(topic.name)}">
 
-               </li>
+               <table>
+                   <tr>
+                       <td>
+                           <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${student.hasFinishedTopic(topic.name)}" th:text="${topic.name}+finished">
+                           <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${student.hasBlockedTopic(topic.name)}" th:text="${topic.name}+blocked">
+                           <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}">
+                           </li>
+                       </td>
+
+                       <td>
+                           <form method="POST" th:action="@{|/students/${student.id}/finish/${topic.id}|}">
+                               <button type="submit" name="submit" value="value" class="btn btn-outline-success">finish</button>
+                           </form>
+                       </td>
+
+                       <td>
+                           <form method="POST" th:action="@{|/students/${student.id}/unfinish/${topic.id}|}">
+                               <button type="submit" name="submit" value="value" class="btn btn-outline-warning">unfinish</button>
+                           </form>
+
+                       </td>
+
+                       <td>
+                           <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
+                               <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
+                           </form>
+
+                       </td>
+
+                        <td>
+                            <form method="POST" th:action="@{|/students/${student.id}/unblock/${topic.id}|}">
+                                <button type="submit" name="submit" value="value" class="btn btn-outline-info">unblock</button>
+                            </form>
+
+                        </td>
+
+
+
+
+
+
+
+
+                   </tr>
+
+               </table>
+
+
            </ul>
             </details>
         </li>

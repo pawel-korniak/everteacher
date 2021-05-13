@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("students")
+@RequestMapping("api/students")
 @RequiredArgsConstructor
 class StudentController {
     private final StudentService studentService;
@@ -35,6 +35,11 @@ class StudentController {
         return new ResponseEntity<>(studentService.markTopicAsFinished(studentId, topicId), HttpStatus.OK);
     }
 
+    @PostMapping("{studentId}/unfinish/{topicId}")
+    ResponseEntity<Student> markTopicAsUnFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+        return new ResponseEntity<>(studentService.markTopicAsUnfinished(studentId, topicId), HttpStatus.OK);
+    }
+
     @PostMapping("{studentId}/block/{topicId}")
     ResponseEntity<Student> markTopicAsBlocked(@PathVariable Long studentId, @PathVariable Long topicId) {
         return new ResponseEntity<>(studentService.markTopicAsBlocked(studentId, topicId),HttpStatus.OK);
@@ -45,16 +50,4 @@ class StudentController {
         return new ResponseEntity<>(studentService.unblockTopic(studentId, topicId),HttpStatus.OK);
     }
 
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        studentService.saveAll(List.of(
-//                new Student("Nika", "Veronika"),
-//                new Student("Pawel", "Pawelko"),
-//                new Student("Pawel", "Prokop"),
-//                new Student("Lukasz", "Zaba"),
-//                new Student("Magdalena", "Kwiecinska"),
-//                new Student("Paulina", "Ogorzalek")
-//        ));
-//    }
 }
