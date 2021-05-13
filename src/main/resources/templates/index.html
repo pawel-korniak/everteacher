@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--        <link rel="stylesheet" href="assets/css/style.css"/>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">-->
+</head>
+<body>
+
+<div class="container">
+    <table class="table table-striped" width="50%">
+        <tr>
+            <td><h4>Name</h4></td>
+            <td th:text="${student.name}"></td>
+        </tr>
+        <tr>
+            <td><h4>LastName</h4></td>
+            <td th:text="${student.lastName}"></td>
+        </tr>
+
+        <tr>
+            <td><h4>Course</h4></td>
+            <td th:text="${course.name}"></td>
+        </tr>
+    </table>
+    <ol class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="supertopic: ${superTopics}">
+            <details>
+                <summary>
+                    <span th:text="${supertopic.name}"></span>
+                    <span class="badge badge-primary badge-pill" th:text="${supertopic.getTopicList().size()}"></span>
+                </summary>
+           <ul class="list-group" style="list-style-type:disc;" th:each="topic: ${supertopic.getTopicList()}">
+
+               <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}+finished" th:if="${student.hasFinishedTopic(topic.name)}">
+               <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" th:unless="${student.hasFinishedTopic(topic.name)}">
+
+               </li>
+           </ul>
+            </details>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>
