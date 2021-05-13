@@ -26,7 +26,7 @@ public class StudentTHController {
             return "redirect:/students/" + student.getId();
         }
         Logger.info("Logged teacher");
-        return "redirect:/students/19";
+        return "redirect:/list";
     }
 
     @GetMapping("{studentId}")
