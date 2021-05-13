@@ -24,9 +24,9 @@ public class Student {//} implements UserDetails {
     String lastName;
     @OneToOne
     Course course;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Topic> finishedTopics;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Topic> blockedTopics;
 
     public Student(String name, String lastName) {

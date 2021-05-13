@@ -16,22 +16,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 public class Initializer {
-    private final StudentService studentService;
-    private final CourseService courseService;
-    private final TeacherService teacherService;
-
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        studentService.saveAll(List.of(
-                new Student("Nika", "Veronika"),
-                new Student("Pawel", "Pawelko"),
-                new Student("Pawel", "Prokop"),
-                new Student("Lukasz", "Zaba"),
-                new Student("Magdalena", "Kwiecinska"),
-                new Student("Paulina", "Ogorzalek")
-        ));
-        courseService.save(CourseProvider.getProvider().provide());
-        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-                new Teacher("Marcin", "Borek")));
-    }
+//    private final StudentService studentService;
+//    private final CourseService courseService;
+//    private final TeacherService teacherService;
+//
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        studentService.saveAll(List.of(
+//                new Student("Nika", "Veronika"),
+//                new Student("Pawel", "Pawelko"),
+//                new Student("Pawel", "Prokop"),
+//                new Student("Lukasz", "Zaba"),
+//                new Student("Magdalena", "Kwiecinska"),
+//                new Student("Paulina", "Ogorzalek")
+//        ));
+//        courseService.save(CourseProvider.getProvider().provide());
+//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+//                new Teacher("Marcin", "Borek")));
+//    }
 }
