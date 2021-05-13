@@ -39,12 +39,16 @@ public class Student {//} implements UserDetails {
         return finishedTopics.stream().anyMatch(topic -> topic.getName().equals(topicName));
     }
 
+    public boolean hasBlockedTopic(String topicName) {
+        return blockedTopics.stream().anyMatch(topic -> topic.getName().equals(topicName));
+    }
+
     public void markedAsFinished(Topic topic) {
         finishedTopics.add(topic);
     }
 
     public void markedAsBlocked(Topic topic) {
-        finishedTopics.remove(topic);
+        markAsUnfinished(topic);
         blockedTopics.add(topic);
     }
 
@@ -52,6 +56,12 @@ public class Student {//} implements UserDetails {
         blockedTopics.remove(topic);
         finishedTopics.add(topic);
     }
+
+    public void markAsUnfinished(Topic topic) {
+        finishedTopics.remove(topic);
+    }
+
+
 
 
     //    @Override

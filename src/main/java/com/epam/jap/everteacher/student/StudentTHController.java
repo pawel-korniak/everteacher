@@ -5,14 +5,12 @@ import org.pmw.tinylog.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("students")
 public class StudentTHController {
 
     final StudentService studentService;
@@ -33,11 +31,30 @@ public class StudentTHController {
         return "index";
     }
 
-
-    @PostMapping
-    ResponseEntity<Student> save(@RequestBody Student student) {
-        return new ResponseEntity<>(studentService.save(student), HttpStatus.CREATED);
+    @PostMapping("{studentId}/finish/{topicId}")
+    String  markTopicAsFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+        studentService.markTopicAsFinished(studentId, topicId);
+        return "redirect:/students/" + studentId;
     }
+
+    @PostMapping("{studentId}/unfinish/{topicId}")
+    String  markTopicAsUnfinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+        studentService.markTopicAsUnfinished(studentId, topicId);
+        return "redirect:/students/" + studentId;
+    }
+
+    @PostMapping("{studentId}/block/{topicId}")
+    String markTopicAsBlocked(@PathVariable Long studentId, @PathVariable Long topicId) {
+        studentService.markTopicAsBlocked(studentId, topicId);
+        return "redirect:/students/" + studentId;
+    }
+
+    @PostMapping("{studentId}/unblock/{topicId}")
+    String unblockTopic(@PathVariable Long studentId, @PathVariable Long topicId) {
+        studentService.unblockTopic(studentId, topicId);
+        return "redirect:/students/" + studentId;
+    }
+
 
 //    @GetMapping
 //    ResponseEntity<List<Student>> showAll() {
@@ -49,18 +66,9 @@ public class StudentTHController {
 //        return new ResponseEntity<>(studentService.findById(studentId), HttpStatus.OK);
 //    }
 
-    @PostMapping("{studentId}/finish/{topicId}")
-    ResponseEntity<Student> markTopicAsFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
-        return new ResponseEntity<>(studentService.markTopicAsFinished(studentId, topicId), HttpStatus.OK);
-    }
 
-    @PostMapping("{studentId}/block/{topicId}")
-    ResponseEntity<Student> markTopicAsBlocked(@PathVariable Long studentId, @PathVariable Long topicId) {
-        return new ResponseEntity<>(studentService.markTopicAsBlocked(studentId, topicId),HttpStatus.OK);
-    }
 
-    @PostMapping("{studentId}/unblock/{topicId}")
-    ResponseEntity<Student> unblockTopic(@PathVariable Long studentId, @PathVariable Long topicId) {
-        return new ResponseEntity<>(studentService.unblockTopic(studentId, topicId),HttpStatus.OK);
-    }
+//
+//
+//
 }

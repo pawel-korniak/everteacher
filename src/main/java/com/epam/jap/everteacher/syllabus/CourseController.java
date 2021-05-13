@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("courses")
+@RequestMapping("api/courses")
 @RequiredArgsConstructor
 class CourseController {
     private final CourseService courseService;
@@ -22,10 +22,4 @@ class CourseController {
         List<Course> courses = courseService.showAll();
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        courseService.save(CourseProvider.getProvider().provide());
-//    }
-
 }

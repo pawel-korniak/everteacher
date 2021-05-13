@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("teachers")
+@RequestMapping("api/teachers")
 class TeacherController {
 
     private final TeacherService teacherService;
@@ -41,12 +41,6 @@ class TeacherController {
         Teacher teacher = teacherService.findById(teacherId);
         return new ResponseEntity<>(teacherService.signTeacherToCourse(teacher,course),HttpStatus.OK);
     }
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-//                new Teacher("Marcin", "Borek")));
-//    }
 
 //    @GetMapping("hello")
 //    public String privateHello(@AuthenticationPrincipal User student){
