@@ -42,11 +42,11 @@ class TeacherController {
         return new ResponseEntity<>(teacherService.signTeacherToCourse(teacher,course),HttpStatus.OK);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-                new Teacher("Marcin", "Borek")));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+//                new Teacher("Marcin", "Borek")));
+//    }
 
 //    @GetMapping("hello")
 //    public String privateHello(@AuthenticationPrincipal User student){

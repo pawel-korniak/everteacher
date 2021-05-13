@@ -23,9 +23,9 @@ class CourseController {
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        courseService.save(CourseProvider.getProvider().provide());
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        courseService.save(CourseProvider.getProvider().provide());
+//    }
 
 }

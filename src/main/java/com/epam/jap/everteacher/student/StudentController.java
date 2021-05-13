@@ -46,15 +46,15 @@ class StudentController {
     }
 
 
-    @EventListener(ApplicationReadyEvent.class)
-    void save() {
-        studentService.saveAll(List.of(
-                new Student("Nika", "Veronika"),
-                new Student("Pawel", "Pawelko"),
-                new Student("Pawel", "Prokop"),
-                new Student("Lukasz", "Zaba"),
-                new Student("Magdalena", "Kwiecinska"),
-                new Student("Paulina", "Ogorzalek")
-        ));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    void save() {
+//        studentService.saveAll(List.of(
+//                new Student("Nika", "Veronika"),
+//                new Student("Pawel", "Pawelko"),
+//                new Student("Pawel", "Prokop"),
+//                new Student("Lukasz", "Zaba"),
+//                new Student("Magdalena", "Kwiecinska"),
+//                new Student("Paulina", "Ogorzalek")
+//        ));
+//    }
 }
