@@ -1,0 +1,11 @@
+=== API http://localhost:8081/swagger-ui/
+. JASYPT_KEY=keyacademy as enviromental variable
+
+=== Web page http://localhost:8081/
+. JASYPT_KEY=keyacademy as enviromental variable
+. Log as Tomek Borek to get teacher's privileges (username: Tomek, password: Borek)
+. Log as Nika Veronika to get student's privileges (username: Nika, password: Veronika)
+
+=== Docker image
+. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
+

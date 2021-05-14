@@ -17,7 +17,7 @@ public class GroupOfStudents {
     @GeneratedValue
     Long id;
     String name;
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Student> students;
 
     public GroupOfStudents(String groupName) {

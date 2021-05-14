@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--        <link rel="stylesheet" href="assets/css/style.css"/>-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">-->
 </head>
 <body>
-<div class="container">
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <div align="right">
+            <span class="font-weight-bold" th:text ="'Logged as ' + ${principal}"></span>
+        </div>
+        <div sec:authorize="hasRole('TEACHER')">
+            <form method="GET" th:action="@{/list}">
+                <button type="submit" name="submit" value="value" class="btn btn-outline-success">All students</button>
+            </form>
+        </div>
+        <div>
+            <form method="POST" th:action="@{/logout}">
+                <button type="submit" name="submit" value="value" class="btn btn-outline-success">Log Out</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="float:left; margin-left:300px; margin-top:100px">
     <table class="table table-striped" width="50%">
         <tr>
             <td><h4>Name</h4></td>
@@ -38,31 +55,26 @@
                            <td width="30%">
                                <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" ></li>
                            </td>
-
                            <td>
                                <img src="https://www.pikpng.com/pngl/b/320-3203375_checked-icon-clipart.png" width="40px" height="40px" th:if="${student.hasFinishedTopic(topic.name)}">
                                <img src="https://cdn0.iconfinder.com/data/icons/ecommerce-2-13/65/57-512.png" width="40px" height="40px" th:if="${student.hasBlockedTopic(topic.name)}">
                            </td>
-
-                           <td th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}">
+                           <td th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}" sec:authorize="hasRole('ROLE_STUDENT')">
                                <form method="POST" th:action="@{|/students/${student.id}/finish/${topic.id}|}">
                                    <button type="submit" name="submit" value="value" class="btn btn-outline-success">finish</button>
                                </form>
                            </td>
-
-                           <td th:if="${student.hasFinishedTopic(topic.name)}">
+                           <td th:if="${student.hasFinishedTopic(topic.name)}" sec:authorize="hasRole('ROLE_STUDENT')">
                                <form method="POST" th:action="@{|/students/${student.id}/unfinish/${topic.id}|}">
                                    <button type="submit" name="submit" value="value" class="btn btn-outline-warning">unfinish</button>
                                </form>
                            </td>
-
-                           <td th:if="${student.hasFinishedTopic(topic.name)}">
-                               <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
-                                   <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
-                               </form>
-                           </td>
-
-                            <td th:if="${student.hasBlockedTopic(topic.name)}">
+                            <td th:if="${student.hasFinishedTopic(topic.name)}" sec:authorize="hasRole('TEACHER')">
+                                <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
+                                    <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
+                                </form>
+                            </td>
+                            <td th:if="${student.hasBlockedTopic(topic.name)}" sec:authorize="hasRole('ROLE_TEACHER')">
                                 <form method="POST" th:action="@{|/students/${student.id}/unblock/${topic.id}|}">
                                     <button type="submit" name="submit" value="value" class="btn btn-outline-info">unblock</button>
                                 </form>
