@@ -1,9 +1,12 @@
 package com.epam.jap.everteacher.student;
 
+import com.epam.jap.everteacher.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.pmw.tinylog.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -14,6 +17,17 @@ import org.springframework.ui.Model;
 public class StudentTHController {
 
     final StudentService studentService;
+
+    @GetMapping
+    String start(@AuthenticationPrincipal UserDetails user){
+        if(user instanceof Student) {
+            Student student = (Student) user;
+            Logger.info(String.format("Logged student : name %s , ID %d REDIRECTING to %s",student.getUsername(),student.getId(),"redirect:/students/" + student.getId()));
+            return "redirect:/students/" + student.getId();
+        }
+        Logger.info("Logged teacher");
+        return "redirect:/list";
+    }
 
     @GetMapping("{studentId}")
     String showAll(Model model,@PathVariable Long studentId) {

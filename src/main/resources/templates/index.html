@@ -8,7 +8,6 @@
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">-->
 </head>
 <body>
-
 <div class="container">
     <table class="table table-striped" width="50%">
         <tr>
@@ -32,58 +31,45 @@
                     <span th:text="${supertopic.name}"></span>
                     <span class="badge badge-primary badge-pill" th:text="${supertopic.getTopicList().size()}"></span>
                 </summary>
-           <ul class="list-group" style="list-style-type:disc;" th:each="topic: ${supertopic.getTopicList()}">
+                <ul class="list-group" style="list-style-type:disc;" th:each="topic: ${supertopic.getTopicList()}">
 
+                   <table>
+                       <tr>
+                           <td width="30%">
+                               <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" ></li>
+                           </td>
 
-               <table>
-                   <tr>
-                       <td>
-                           <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${student.hasFinishedTopic(topic.name)}" th:text="${topic.name}+finished">
-                           <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${student.hasBlockedTopic(topic.name)}" th:text="${topic.name}+blocked">
-                           <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${topic.name}" th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}">
-                           </li>
-                       </td>
+                           <td>
+                               <img src="https://www.pikpng.com/pngl/b/320-3203375_checked-icon-clipart.png" width="40px" height="40px" th:if="${student.hasFinishedTopic(topic.name)}">
+                               <img src="https://cdn0.iconfinder.com/data/icons/ecommerce-2-13/65/57-512.png" width="40px" height="40px" th:if="${student.hasBlockedTopic(topic.name)}">
+                           </td>
 
-                       <td>
-                           <form method="POST" th:action="@{|/students/${student.id}/finish/${topic.id}|}">
-                               <button type="submit" name="submit" value="value" class="btn btn-outline-success">finish</button>
-                           </form>
-                       </td>
+                           <td th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}">
+                               <form method="POST" th:action="@{|/students/${student.id}/finish/${topic.id}|}">
+                                   <button type="submit" name="submit" value="value" class="btn btn-outline-success">finish</button>
+                               </form>
+                           </td>
 
-                       <td>
-                           <form method="POST" th:action="@{|/students/${student.id}/unfinish/${topic.id}|}">
-                               <button type="submit" name="submit" value="value" class="btn btn-outline-warning">unfinish</button>
-                           </form>
+                           <td th:if="${student.hasFinishedTopic(topic.name)}">
+                               <form method="POST" th:action="@{|/students/${student.id}/unfinish/${topic.id}|}">
+                                   <button type="submit" name="submit" value="value" class="btn btn-outline-warning">unfinish</button>
+                               </form>
+                           </td>
 
-                       </td>
+                           <td th:if="${student.hasFinishedTopic(topic.name)}">
+                               <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
+                                   <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
+                               </form>
+                           </td>
 
-                       <td>
-                           <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
-                               <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
-                           </form>
-
-                       </td>
-
-                        <td>
-                            <form method="POST" th:action="@{|/students/${student.id}/unblock/${topic.id}|}">
-                                <button type="submit" name="submit" value="value" class="btn btn-outline-info">unblock</button>
-                            </form>
-
-                        </td>
-
-
-
-
-
-
-
-
-                   </tr>
-
-               </table>
-
-
-           </ul>
+                            <td th:if="${student.hasBlockedTopic(topic.name)}">
+                                <form method="POST" th:action="@{|/students/${student.id}/unblock/${topic.id}|}">
+                                    <button type="submit" name="submit" value="value" class="btn btn-outline-info">unblock</button>
+                                </form>
+                            </td>
+                       </tr>
+                   </table>
+                </ul>
             </details>
         </li>
     </ol>

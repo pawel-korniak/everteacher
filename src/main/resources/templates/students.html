@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--        <link rel="stylesheet" href="assets/css/style.css"/>-->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">-->
+</head>
+
+<body>
+
+<table>
+    <tr th:each="student: ${list}">
+        <td>
+            <span th:text="${student.name}"></span>
+        </td>
+        <td>
+            <span th:text="${student.lastName}"></span>
+        </td>
+        <td>
+            <a th:href="@{|/students/${student.id}|}">LINK</a>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>
