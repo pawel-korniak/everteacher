@@ -5,8 +5,11 @@ import org.pmw.tinylog.Logger;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -16,10 +19,10 @@ public class StudentTHController {
     final StudentService studentService;
 
     @GetMapping
-    String start(@AuthenticationPrincipal UserDetails user){
-        if(user instanceof Student) {
+    String start(@AuthenticationPrincipal UserDetails user) {
+        if (user instanceof Student) {
             Student student = (Student) user;
-            Logger.info(String.format("Logged student : name %s , ID %d REDIRECTING to %s",student.getUsername(),student.getId(),"redirect:/students/" + student.getId()));
+            Logger.info(String.format("Logged student : name %s , ID %d REDIRECTING to %s", student.getUsername(), student.getId(), "redirect:/students/" + student.getId()));
             return "redirect:/students/" + student.getId();
         }
         Logger.info("Logged teacher");
@@ -27,10 +30,10 @@ public class StudentTHController {
     }
 
     @GetMapping("{studentId}")
-    String showAll(Model model,@PathVariable Long studentId, @AuthenticationPrincipal UserDetails user) {
-        if(user instanceof Student){
-            var loggedStudentId = ((Student)user).getId();
-            if(!loggedStudentId.equals(studentId)){
+    String showAll(Model model, @PathVariable Long studentId, @AuthenticationPrincipal UserDetails user) {
+        if (user instanceof Student) {
+            var loggedStudentId = ((Student) user).getId();
+            if (!loggedStudentId.equals(studentId)) {
                 throw new org.springframework.security.access.AccessDeniedException("403 returned");
             }
         }
@@ -48,13 +51,13 @@ public class StudentTHController {
     }
 
     @PostMapping("{studentId}/finish/{topicId}")
-    String  markTopicAsFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+    String markTopicAsFinished(@PathVariable Long studentId, @PathVariable Long topicId) {
         studentService.markTopicAsFinished(studentId, topicId);
         return "redirect:/students/" + studentId;
     }
 
     @PostMapping("{studentId}/unfinish/{topicId}")
-    String  markTopicAsUnfinished(@PathVariable Long studentId, @PathVariable Long topicId) {
+    String markTopicAsUnfinished(@PathVariable Long studentId, @PathVariable Long topicId) {
         studentService.markTopicAsUnfinished(studentId, topicId);
         return "redirect:/students/" + studentId;
     }

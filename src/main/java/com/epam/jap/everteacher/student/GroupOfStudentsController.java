@@ -2,7 +2,6 @@ package com.epam.jap.everteacher.student;
 
 import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.CourseService;
-import com.epam.jap.everteacher.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class GroupOfStudentsController {
 
     @GetMapping("{groupId}")
     ResponseEntity<GroupOfStudents> findById(@PathVariable Long groupId) {
-        return new ResponseEntity<>(groupOfStudentsService.findById(groupId),HttpStatus.OK);
+        return new ResponseEntity<>(groupOfStudentsService.findById(groupId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -32,7 +31,7 @@ public class GroupOfStudentsController {
     @PostMapping("{groupId}")
     ResponseEntity<GroupOfStudents> addStudentsToGroup(@PathVariable Long groupId, @RequestParam List<Long> id) {
         List<Student> studentList = studentService.findAllById(id);
-        return new ResponseEntity<>(groupOfStudentsService.addStudentsToGroup(groupId,studentList), HttpStatus.OK);
+        return new ResponseEntity<>(groupOfStudentsService.addStudentsToGroup(groupId, studentList), HttpStatus.OK);
     }
 
     @PostMapping("{groupId}/sign-to-course/{courseId}")

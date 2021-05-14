@@ -5,7 +5,6 @@ import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.pmw.tinylog.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +36,9 @@ public class Student implements UserDetails {
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-//        Logger.info("Student Constructor : %s , %d",name );
     }
 
     public Student(String nika, String s, Course course) {
-
         name = nika;
         lastName = s;
         this.course = course;

@@ -1,8 +1,6 @@
 package com.epam.jap.everteacher.student;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +40,12 @@ class StudentController {
 
     @PostMapping("{studentId}/block/{topicId}")
     ResponseEntity<Student> markTopicAsBlocked(@PathVariable Long studentId, @PathVariable Long topicId) {
-        return new ResponseEntity<>(studentService.markTopicAsBlocked(studentId, topicId),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.markTopicAsBlocked(studentId, topicId), HttpStatus.OK);
     }
 
     @PostMapping("{studentId}/unblock/{topicId}")
     ResponseEntity<Student> unblockTopic(@PathVariable Long studentId, @PathVariable Long topicId) {
-        return new ResponseEntity<>(studentService.unblockTopic(studentId, topicId),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.unblockTopic(studentId, topicId), HttpStatus.OK);
     }
 
 }
