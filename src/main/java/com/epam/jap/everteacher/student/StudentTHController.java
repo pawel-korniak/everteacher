@@ -1,10 +1,7 @@
 package com.epam.jap.everteacher.student;
 
-import com.epam.jap.everteacher.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.pmw.tinylog.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -30,18 +27,23 @@ public class StudentTHController {
     }
 
     @GetMapping("{studentId}")
-    String showAll(Model model,@PathVariable Long studentId) {
+    String showAll(Model model,@PathVariable Long studentId, @AuthenticationPrincipal UserDetails user) {
+        if(user instanceof Student){
+            var loggedStudentId = ((Student)user).getId();
+            if(!loggedStudentId.equals(studentId)){
+                throw new org.springframework.security.access.AccessDeniedException("403 returned");
+            }
+        }
         final Student student = studentService.findById(studentId);
         var superTopics = student.getCourse().getSuperTopics();
-
-
         Logger.info("Student : " + student);
         model.addAttribute("student", student);
         Logger.info("Course : " + student.getCourse());
         model.addAttribute("course", student.getCourse());
-//        model.addAttribute("topics", student.getCourse().allTopics());
         Logger.info("Supertopics : " + superTopics);
         model.addAttribute("superTopics", superTopics);
+        Logger.info("User : " + user.getUsername());
+        model.addAttribute("principal", user.getUsername());
         return "index";
     }
 
@@ -68,21 +70,4 @@ public class StudentTHController {
         studentService.unblockTopic(studentId, topicId);
         return "redirect:/students/" + studentId;
     }
-
-
-//    @GetMapping
-//    ResponseEntity<List<Student>> showAll() {
-//        return new ResponseEntity<>(studentService.showAll(), HttpStatus.OK);
-//    }
-
-//    @GetMapping("{studentId}")
-//    ResponseEntity<Student> findById(@PathVariable Long studentId) {
-//        return new ResponseEntity<>(studentService.findById(studentId), HttpStatus.OK);
-//    }
-
-
-
-//
-//
-//
 }

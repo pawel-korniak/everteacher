@@ -52,7 +52,7 @@ public class Teacher implements UserDetails {
 
     @Override
     public String getPassword() {
-        return lastName;
+        return "{noop}" + lastName;
     }
 
     @Override

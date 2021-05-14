@@ -27,13 +27,13 @@ public class Initializer {
         Course course = CourseProvider.getProvider().provide();
         courseService.save(course);
         studentService.saveAll(List.of(
-                new Student("Nika", "{noop}Veronika",course),
-                new Student("Pawel", "{noop}Pawelko", course),
-                new Student("Lukasz", "{noop}Zaba", course),
-                new Student("Magdalena", "{noop}Kwiecinska", course),
-                new Student("Paulina", "{noop}Ogorzalek", course)
+                new Student("Nika", "Veronika",course),
+                new Student("Pawel", "Pawelko", course),
+                new Student("Lukasz", "Zaba", course),
+                new Student("Magdalena", "Kwiecinska", course),
+                new Student("Paulina", "Ogorzalek", course)
         ));
-        teacherService.saveAll(List.of(new Teacher("Tomek", "{noop}Borek"),
-                new Teacher("Marcin", "{noop}Borek")));
+        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+                new Teacher("Marcin", "Borek")));
     }
 }
