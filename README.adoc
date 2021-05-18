@@ -4,8 +4,8 @@
 === Web page http://localhost:8081/
 . JASYPT_KEY=keyacademy as enviromental variable
 . Log as Tomek Borek to get teacher's privileges (username: Tomek, password: Borek)
-. Log as Nika Veronika to get student's privileges (username: Nika, password: Veronika)
+. Log as Veronika Korniakowa to get student's privileges (username: Veronika, password: Korniakowa)
 
-=== Docker image
-. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
+//=== Docker image
+//. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
 
