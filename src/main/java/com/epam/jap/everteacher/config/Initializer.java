@@ -22,9 +22,9 @@ public class Initializer {
     private final CourseService courseService;
     private final TeacherService teacherService;
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    void save() {
-//        Course course = CourseProvider.getProvider().provide();
+    @EventListener(ApplicationReadyEvent.class)
+    void save() {
+//        Course course = CourseProvider.getProvider().provide("Java Academy");
 //        courseService.save(course);
 //        studentService.saveAll(List.of(
 //                new Student("Nika", "Veronika",course),
@@ -33,7 +33,7 @@ public class Initializer {
 //                new Student("Magdalena", "Kwiecinska", course),
 //                new Student("Paulina", "Ogorzalek", course)
 //        ));
-//        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
-//                new Teacher("Marcin", "Borek")));
-//    }
+        teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
+                new Teacher("Marcin", "Borek")));
+    }
 }
