@@ -2,27 +2,21 @@ package com.epam.jap.everteacher.syllabus;
 
 import org.pmw.tinylog.Logger;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-class CourseFromFile implements CourseProvider {
-    private final Path path = Paths.get("course.txt");
-
+public class CourseFromFile implements CourseProvider {
     @Override
-    public Course provide() {
-        return new Course(findValueFromGivenKey("name:"), getCourseDate("start:"), getCourseDate("end:"), createTopics());
+    public Course provide(String text) {
+        return new Course(findValueFromGivenKey("name:", text), getCourseDate("start:", text), getCourseDate("end:", text), createTopics(text));
+
     }
 
-    private List<SuperTopic> createTopics() {
+    private List<SuperTopic> createTopics(String text) {
         List<SuperTopic> superTopics = new ArrayList<>();
-        String syllabus = getSyllabus();
+        String syllabus = getSyllabus(text);
 
         var topics = syllabus.split("\\d\\. ");
         for (int i = 1; i < topics.length; i++) {
@@ -42,30 +36,17 @@ class CourseFromFile implements CourseProvider {
         return topicList;
     }
 
-    private String getSyllabus() {
-        String data = "";
-        try (Stream<String> lines = Files.lines(path)) {
-            data = lines.collect(Collectors.joining(" "));
-        } catch (IOException e) {
-            Logger.error(e.getMessage());
-        }
-        Logger.info("Data : " + data);
-        return data.split("syllabus:")[1];
+    private String getSyllabus(String text) {
+        return text.lines().collect(Collectors.joining(" ")).split("syllabus:")[1];
     }
 
 
-    private LocalDate getCourseDate(String key) {
-        String start = findValueFromGivenKey(key);
+    private LocalDate getCourseDate(String key, String text) {
+        String start = findValueFromGivenKey(key, text);
         return LocalDate.parse(start);
     }
 
-    private String findValueFromGivenKey(String key) {
-        String matchingLine = "";
-        try (Stream<String> lines = Files.lines(path)) {
-            matchingLine = lines.filter(s -> s.startsWith(key)).findAny().orElseThrow();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return matchingLine.split(" ", 2)[1];
+    private String findValueFromGivenKey(String key, String text) {
+        return text.lines().filter(s -> s.startsWith(key)).findAny().orElseThrow().split(" ", 2)[1];
     }
 }

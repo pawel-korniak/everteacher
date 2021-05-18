@@ -21,4 +21,9 @@ public class CourseService {
     public Course findById(Long courseId) {
         return courseRepository.getById(courseId);
     }
+
+    public Course saveCourseFromFile(String text, String courseName) {
+        Course course = CourseProvider.getProvider().provide(text);
+        return courseRepository.save(course);
+    }
 }

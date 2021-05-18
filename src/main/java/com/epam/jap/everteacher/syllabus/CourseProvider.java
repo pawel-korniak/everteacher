@@ -1,7 +1,7 @@
 package com.epam.jap.everteacher.syllabus;
 
 public interface CourseProvider {
-    Course provide();
+    Course provide(String text);
 
     static CourseProvider getProvider() {
         return new CourseFromFile();
