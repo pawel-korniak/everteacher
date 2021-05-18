@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().defaultSuccessUrl("/students", true)
+                .and().csrf().disable();
         ;
     }
 }

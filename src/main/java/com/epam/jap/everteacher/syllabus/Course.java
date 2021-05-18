@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 public class Course {
-
-
+    @GeneratedValue
+    @Id
+    Long id;
     String name;
     @Column(name = "start_date")
     LocalDate startDate;
@@ -23,9 +24,6 @@ public class Course {
     @Column(name = "super_topics")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<SuperTopic> superTopics;
-    @GeneratedValue
-    @Id
-    Long id;
 
     public Course(String name, LocalDate startDate, LocalDate endDate, List<SuperTopic> superTopics) {
         this.name = name;

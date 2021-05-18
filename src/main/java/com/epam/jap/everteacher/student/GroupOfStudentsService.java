@@ -29,4 +29,9 @@ public class GroupOfStudentsService {
         groupOfStudents.getStudents().forEach(student -> student.setCourse(course));
         return groupOfStudentsRepository.save(groupOfStudents);
     }
+
+    GroupOfStudents saveStudentsFromFile(String text, String groupName) {
+        GroupOfStudents groupOfStudents = GroupProvider.getProvider().provide(text, groupName);
+        return groupOfStudentsRepository.save(groupOfStudents);
+    }
 }

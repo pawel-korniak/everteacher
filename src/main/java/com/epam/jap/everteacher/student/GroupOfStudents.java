@@ -23,4 +23,9 @@ public class GroupOfStudents {
     public GroupOfStudents(String groupName) {
         name = groupName;
     }
+
+    public GroupOfStudents(String name, List<Student> students) {
+        this.name = name;
+        this.students = students;
+    }
 }
