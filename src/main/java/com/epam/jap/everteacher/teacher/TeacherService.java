@@ -37,4 +37,8 @@ public class TeacherService {
     public UserDetails findByName(String name) {
         return teacherRepository.findByName(name);
     }
+
+    public UserDetails findByLogin(String login) {
+        return teacherRepository.findByLogin(login);
+    }
 }

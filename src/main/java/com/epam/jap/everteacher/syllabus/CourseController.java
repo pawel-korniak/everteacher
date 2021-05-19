@@ -25,7 +25,7 @@ class CourseController {
     ResponseEntity<Course> saveCourse(@RequestParam("course")MultipartFile multipartFile){
         Course course = null;
         try {
-            course = courseService.saveCourseFromFile(new String(multipartFile.getBytes()), multipartFile.getName());
+            course = courseService.saveCourseFromFile(new String(multipartFile.getBytes()));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -32,16 +32,20 @@ public class Student implements UserDetails {
     List<Topic> finishedTopics;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Topic> blockedTopics;
+    @Column(unique = true)
+    String login;
 
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
+        login = name + "_" + lastName;
     }
 
-    public Student(String nika, String s, Course course) {
-        name = nika;
-        lastName = s;
+    public Student(String name, String lastName, Course course) {
+        this.name = name;
+        this.lastName = lastName;
         this.course = course;
+        login = name + "_" + lastName;
     }
 
     public boolean hasFinishedTopic(String topicName) {
@@ -82,7 +86,7 @@ public class Student implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return login;
     }
 
     @Override

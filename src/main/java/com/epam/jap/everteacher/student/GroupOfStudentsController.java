@@ -34,7 +34,27 @@ public class GroupOfStudentsController {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return new ResponseEntity<>(groupOfStudentsService.saveStudentsFromFile(new String(multipartFileBytes), multipartFile.getOriginalFilename()), HttpStatus.CREATED);
+        return new ResponseEntity<>(groupOfStudentsService.saveStudentsFromFile(new String(multipartFileBytes),
+                multipartFile.getOriginalFilename()), HttpStatus.CREATED);
+    }
+
+    @PostMapping("add-group-with-course")
+    ResponseEntity<GroupOfStudents> saveGroupWithCourse(@RequestParam("group") MultipartFile multipartFileGroup,
+                                                        @RequestParam("course")MultipartFile multipartFileCourse) {
+        byte[] groupFileBytes = new byte[0];
+        byte[] courseFileBytes = new byte[0];
+
+        try {
+            groupFileBytes = multipartFileGroup.getBytes();
+            courseFileBytes = multipartFileCourse.getBytes();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        GroupOfStudents groupOfStudents = groupOfStudentsService.saveStudentsFromFile(new String(groupFileBytes),
+                multipartFileGroup.getOriginalFilename());
+        Course course = courseService.saveCourseFromFile(new String(courseFileBytes));
+
+        return new ResponseEntity<>(groupOfStudentsService.signStudentsToCourse(groupOfStudents, course), HttpStatus.I_AM_A_TEAPOT);
     }
 
     @PostMapping("{groupId}")

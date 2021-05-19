@@ -17,10 +17,10 @@ public class SecurityService implements UserDetailsService {
     private final TeacherService teacherService;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Logger.info("Reach out for Username : " + name);
-        UserDetails user = studentService.findByName(name);
-        if (user==null) user = teacherService.findByName(name);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Logger.info("Reach out for Username : " + login);
+        UserDetails user = studentService.findByLogin(login);
+        if (user==null) user = teacherService.findByLogin(login);
         return user;
     }
 }

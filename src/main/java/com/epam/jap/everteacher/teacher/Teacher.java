@@ -28,10 +28,13 @@ public class Teacher implements UserDetails {
     String lastName;
     @OneToOne
     Course course;
+    @Column(unique = true)
+    String login;
 
     public Teacher(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
+        login = name + "_" + lastName;
         Logger.info("Teacher Constructor name : " + name);
     }
 
@@ -57,7 +60,7 @@ public class Teacher implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return login;
     }
 
     @Override
