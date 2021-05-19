@@ -6,4 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     UserDetails findByName(String name);
+
+    UserDetails findByLogin(String login);
 }

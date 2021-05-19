@@ -22,7 +22,7 @@ public class CourseService {
         return courseRepository.getById(courseId);
     }
 
-    public Course saveCourseFromFile(String text, String courseName) {
+    public Course saveCourseFromFile(String text) {
         Course course = CourseProvider.getProvider().provide(text);
         return courseRepository.save(course);
     }

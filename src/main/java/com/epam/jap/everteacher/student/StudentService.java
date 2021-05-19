@@ -82,4 +82,8 @@ public class StudentService {
     public UserDetails findByName(String name) {
         return studentRepository.findByName(name);
     }
+
+    public UserDetails findByLogin(String login) {
+        return studentRepository.findByLogin(login);
+    }
 }

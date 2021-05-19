@@ -59,17 +59,17 @@
                                <img src="https://www.pikpng.com/pngl/b/320-3203375_checked-icon-clipart.png" width="40px" height="40px" th:if="${student.hasFinishedTopic(topic.name)}">
                                <img src="https://cdn0.iconfinder.com/data/icons/ecommerce-2-13/65/57-512.png" width="40px" height="40px" th:if="${student.hasBlockedTopic(topic.name)}">
                            </td>
-                           <td th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}" sec:authorize="hasRole('ROLE_STUDENT')">
+                           <td th:unless="${student.hasFinishedTopic(topic.name) or student.hasBlockedTopic(topic.name)}">
                                <form method="POST" th:action="@{|/students/${student.id}/finish/${topic.id}|}">
                                    <button type="submit" name="submit" value="value" class="btn btn-outline-success">finish</button>
                                </form>
                            </td>
-                           <td th:if="${student.hasFinishedTopic(topic.name)}" sec:authorize="hasRole('ROLE_STUDENT')">
+                           <td th:if="${student.hasFinishedTopic(topic.name)}">
                                <form method="POST" th:action="@{|/students/${student.id}/unfinish/${topic.id}|}">
                                    <button type="submit" name="submit" value="value" class="btn btn-outline-warning">unfinish</button>
                                </form>
                            </td>
-                            <td th:if="${student.hasFinishedTopic(topic.name)}" sec:authorize="hasRole('TEACHER')">
+                            <td th:if="${student.hasFinishedTopic(topic.name)}" sec:authorize="hasRole('ROLE_TEACHER')">
                                 <form method="POST" th:action="@{|/students/${student.id}/block/${topic.id}|}">
                                     <button type="submit" name="submit" value="value" class="btn btn-outline-danger">block</button>
                                 </form>
