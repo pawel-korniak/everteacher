@@ -1,5 +1,6 @@
 package com.epam.jap.everteacher.student;
 
+import com.epam.jap.everteacher.exceptions.UserNotFoundException;
 import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -20,10 +20,6 @@ public class StudentService {
 
     public List<Student> showAll() {
         return studentRepository.findAll();
-    }
-
-    public List<Student> showAll(String topicName) {
-        return studentRepository.findAll().stream().filter(student -> student.hasFinishedTopic(topicName)).collect(Collectors.toList());
     }
 
     public Student findById(Long id) {
@@ -79,11 +75,10 @@ public class StudentService {
         return studentRepository.findAllById(id);
     }
 
-    public UserDetails findByName(String name) {
-        return studentRepository.findByName(name);
-    }
+    public UserDetails findByLogin(String login) throws UserNotFoundException {
+        UserDetails user = studentRepository.findByLogin(login).orElseThrow(() -> new UserNotFoundException(login));
 
-    public UserDetails findByLogin(String login) {
-        return studentRepository.findByLogin(login);
+        //if(user == null) throw new UserNotFoundException(login);
+        return user;
     }
 }
