@@ -1,6 +1,7 @@
 package com.epam.jap.everteacher.student;
 
 import com.epam.jap.everteacher.syllabus.Course;
+import com.epam.jap.everteacher.syllabus.SuperTopic;
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +9,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,11 +37,13 @@ public class Student implements UserDetails {
     List<Topic> blockedTopics;
     @Column(unique = true)
     String login;
+    String password;
 
     public Student(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
         login = name + "_" + lastName;
+        password = new BCryptPasswordEncoder().encode(lastName);
     }
 
     public Student(String name, String lastName, Course course) {
@@ -46,6 +51,15 @@ public class Student implements UserDetails {
         this.lastName = lastName;
         this.course = course;
         login = name + "_" + lastName;
+        password = new BCryptPasswordEncoder().encode(lastName);
+    }
+
+    public int countProgress(SuperTopic superTopic) {
+        List<Topic> topicListPerSuperTopic = new ArrayList<>(superTopic.getTopicList());
+        int numberOfTopics = topicListPerSuperTopic.size();
+        topicListPerSuperTopic.retainAll(finishedTopics);
+        int numberOfFinishedTopics = topicListPerSuperTopic.size();
+        return numberOfFinishedTopics*100/numberOfTopics;
     }
 
     public boolean hasFinishedTopic(String topicName) {
@@ -81,7 +95,7 @@ public class Student implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "{noop}" + lastName;
+        return "{bcrypt}" + password;
     }
 
     @Override

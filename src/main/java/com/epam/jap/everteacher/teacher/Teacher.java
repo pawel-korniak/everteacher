@@ -8,6 +8,7 @@ import org.pmw.tinylog.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -30,23 +31,15 @@ public class Teacher implements UserDetails {
     Course course;
     @Column(unique = true)
     String login;
+    String password;
 
     public Teacher(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
         login = name + "_" + lastName;
+        password = new BCryptPasswordEncoder().encode(lastName);
         Logger.info("Teacher Constructor name : " + name);
     }
-
-    //    String password;
-//    String role = "TEACHER";
-
-
-//    public Teacher(String name, String lastName, String password) {
-//        this.name = name;
-//        this.lastName = lastName;
-//        this.password = password;
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -55,7 +48,7 @@ public class Teacher implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "{noop}" + lastName;
+        return "{bcrypt}" + password;
     }
 
     @Override

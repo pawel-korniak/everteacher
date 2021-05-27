@@ -47,6 +47,8 @@
                 <summary>
                     <span th:text="${supertopic.name}"></span>
                     <span class="badge badge-primary badge-pill" th:text="${supertopic.getTopicList().size()}"></span>
+                    <span th:text="${student.countProgress(supertopic)}"> </span>
+                    % Completed
                 </summary>
                 <ul class="list-group" style="list-style-type:disc;" th:each="topic: ${supertopic.getTopicList()}">
 
