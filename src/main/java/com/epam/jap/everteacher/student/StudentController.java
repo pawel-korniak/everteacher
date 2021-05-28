@@ -1,6 +1,8 @@
 package com.epam.jap.everteacher.student;
 
+import com.epam.jap.everteacher.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.pmw.tinylog.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +26,13 @@ class StudentController {
     }
 
     @GetMapping("{studentId}")
-    ResponseEntity<Student> findById(@PathVariable Long studentId) {
-        return new ResponseEntity<>(studentService.findById(studentId), HttpStatus.OK);
+    ResponseEntity<Student> findById(@PathVariable Long studentId) throws UserNotFoundException {
+
+        Logger.error("Hello from api/students, You are looking for student with id: " + studentId);
+        Student student = studentService.findById(studentId);
+
+
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @PostMapping("{studentId}/finish/{topicId}")

@@ -24,15 +24,15 @@ public class Initializer {
 
     @EventListener(ApplicationReadyEvent.class)
     void save() {
-        Course course = CourseProvider.getProvider().provide("Java Academy");
-        courseService.save(course);
-        studentService.saveAll(List.of(
-                new Student("Nika", "Veronika",course),
-                new Student("Pawel", "Pawelko", course),
-                new Student("Lukasz", "Zaba", course),
-                new Student("Magdalena", "Kwiecinska", course),
-                new Student("Paulina", "Ogorzalek", course)
-        ));
+//        Course course = CourseProvider.getProvider().provide("Java Academy");
+//        courseService.save(course);
+//        studentService.saveAll(List.of(
+//                new Student("Nika", "Veronika",course),
+//                new Student("Pawel", "Pawelko", course),
+//                new Student("Lukasz", "Zaba", course),
+//                new Student("Magdalena", "Kwiecinska", course),
+//                new Student("Paulina", "Ogorzalek", course)
+//        ));
 
 //        studentService.saveAll(List.of(
 //                new Student("Nika", "Veronika"),

@@ -23,10 +23,11 @@ public class SecurityService implements UserDetailsService {
         UserDetails user = null;
         try {
             user = studentService.findByLogin(login);
-        } catch (UserNotFoundException e) {
+        } catch (UsernameNotFoundException e) {
             Logger.error(e.getMessage());
+            user = teacherService.findByLogin(login);
         }
-        if (user==null) user = teacherService.findByLogin(login);
+        if (user==null) throw new UsernameNotFoundException(login);
         return user;
     }
 }

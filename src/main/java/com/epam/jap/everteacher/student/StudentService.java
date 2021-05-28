@@ -5,6 +5,7 @@ import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.Topic;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student findById(Long id) {
-        return studentRepository.findById(id).orElseThrow();
+    public Student findById(Long id) throws UserNotFoundException {
+        return studentRepository.findById(id).orElseThrow(() -> new UserNotFoundException(""+id));
     }
 
     public List<Student> saveAll(List<Student> students) {
@@ -75,8 +76,8 @@ public class StudentService {
         return studentRepository.findAllById(id);
     }
 
-    public UserDetails findByLogin(String login) throws UserNotFoundException {
-        UserDetails user = studentRepository.findByLogin(login).orElseThrow(() -> new UserNotFoundException(login));
+    public UserDetails findByLogin(String login) throws UsernameNotFoundException {
+        UserDetails user = studentRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(login));
 
         //if(user == null) throw new UserNotFoundException(login);
         return user;
