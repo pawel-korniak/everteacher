@@ -5,7 +5,7 @@
 .. key="course" value=".../resources/course.txt" as form-data
 
 === Web page http://localhost:8081/
-. JASYPT_KEY=keyacademy as enviromental variable
+. set JASYPT_KEY=keyacademy as enviromental variable and export it
 . Log as Tomek Borek to get teacher's privileges (username: Tomek_Borek, password: Borek)
 . To log as student, you need to add group of students, sign them to course (see above) and then log as Nika Veronika(username: Nika_Veronika, password: Veronika)
 
