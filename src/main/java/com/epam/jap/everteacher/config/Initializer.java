@@ -33,6 +33,14 @@ public class Initializer {
 //                new Student("Magdalena", "Kwiecinska", course),
 //                new Student("Paulina", "Ogorzalek", course)
 //        ));
+
+//        studentService.saveAll(List.of(
+//                new Student("Nika", "Veronika"),
+//                new Student("Pawel", "Pawelko"),
+//                new Student("Lukasz", "Zaba"),
+//                new Student("Magdalena", "Kwiecinska"),
+//                new Student("Paulina", "Ogorzalek")
+//        ));
         teacherService.saveAll(List.of(new Teacher("Tomek", "Borek"),
                 new Teacher("Marcin", "Borek")));
     }

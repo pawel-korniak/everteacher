@@ -4,6 +4,6 @@ public interface CourseProvider {
     Course provide(String text);
 
     static CourseProvider getProvider() {
-        return new CourseFromFile();
+        return new CourseFromLocalFile();
     }
 }

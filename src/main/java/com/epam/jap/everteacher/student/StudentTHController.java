@@ -1,5 +1,6 @@
 package com.epam.jap.everteacher.student;
 
+import com.epam.jap.everteacher.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.pmw.tinylog.Logger;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,14 +31,15 @@ public class StudentTHController {
     }
 
     @GetMapping("{studentId}")
-    String showAll(Model model, @PathVariable Long studentId, @AuthenticationPrincipal UserDetails user) {
+    String findById(Model model, @PathVariable Long studentId, @AuthenticationPrincipal UserDetails user) throws UserNotFoundException {
         if (user instanceof Student) {
             var loggedStudentId = ((Student) user).getId();
             if (!loggedStudentId.equals(studentId)) {
                 throw new org.springframework.security.access.AccessDeniedException("403 returned");
             }
         }
-        final Student student = studentService.findById(studentId);
+        Student student = studentService.findById(studentId);
+
         var superTopics = student.getCourse().getSuperTopics();
         Logger.info("Student : " + student);
         model.addAttribute("student", student);

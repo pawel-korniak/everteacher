@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class CourseFromLocalFile implements CourseProvider {
-    private final Path path = Paths.get("course.txt");
+    private final Path path = Paths.get("src/main/resources/course.txt");
 
     @Override
     public Course provide(String text) {
