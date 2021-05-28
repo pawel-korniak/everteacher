@@ -1,5 +1,5 @@
 === API http://localhost:8081/api/groups
-. JASYPT_KEY=keyacademy as enviromental variable
+. set JASYPT_KEY=keyacademy as enviromental variable and export it
 . Add group of students and sign them to course http://localhost:8081/api/groups/add-group-with-course using POST method with 2 parameters:
 .. key="group" value=".../resources/AcademyX.txt" as form-data
 .. key="course" value=".../resources/course.txt" as form-data
@@ -9,6 +9,6 @@
 . Log as Tomek Borek to get teacher's privileges (username: Tomek_Borek, password: Borek)
 . To log as student, you need to add group of students, sign them to course (see above) and then log as Nika Veronika(username: Nika_Veronika, password: Veronika)
 
-//=== Docker image
-//. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
+=== Docker image
+. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
 

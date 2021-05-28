@@ -8,7 +8,6 @@ RUN mvn -f /pom.xml clean package -Dmaven.test.skip
 # Package stage
 #
 FROM openjdk:11-jre-slim
-COPY --from=build /course.txt /
 COPY --from=build /target/everteacher-0.0.1.jar /target/everteacher-0.0.1.jar
 ENTRYPOINT ["java","-jar","/target/everteacher-0.0.1.jar"]
 
