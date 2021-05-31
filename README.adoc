@@ -1,14 +1,83 @@
-=== API http://localhost:8081/api/groups
-. set JASYPT_KEY=keyacademy as enviromental variable and export it
-. Add group of students and sign them to course http://localhost:8081/api/groups/add-group-with-course using POST method with 2 parameters:
-.. key="group" value=".../resources/AcademyX.txt" as form-data
-.. key="course" value=".../resources/course.txt" as form-data
+:authors: Paweł Korniak, Veronika Avramchuk
+:icons: font
+:toc:
+:toc-title: Agenda
 
-=== Web page http://localhost:8081/
+= Everteacher app
+
+Our awesome application helps in the supervising the course flow.
+
+== What you'll need
+* Docker
+* Java 11
+* Maven 3.6.3
+* Postman (for REST API)
+
+== Functionalities
+
+=== As Teacher, you can
+. See all students from the given course
+. Sign students/group of students to the course
+. Check the learning progress of every student
+. Mark topic as finished for some student
+. Mark topic as blocked so only teacher can decide whether the given topic is finished
+
+=== As Student, you can
+. See the syllabus of the course you've been signed to
+. See your personal progress
+. Mark topic as finished
+
+=== At the beginning
+. There are 2 teacher in the database and no students
+. You can log as teacher, but you won't see any students
+. To see students, you should add group of students and sign them to the course:
+.. add group of students
+`http://localhost:8081/api/groups`
++
+using POST method with 1 parameter:
++
+* key="group" value=".../resources/AcademyX.txt" as form-data
+.. sign group of students to the course
+`http://localhost:8081/api/courses`
++
+using POST method with 1 parameter:
++
+* key="course" value=".../resources/course.txt" as form-data
+.. OR in one method:
+`http://localhost:8081/api/groups/add-group-with-course`
++
+using POST method with 2 parameters:
++
+* key="group" value=".../resources/AcademyX.txt" as form-data
+* key="course" value=".../resources/course.txt" as form-data
+
+== How to run
+
+=== Docker
+You can run docker container using command:
+[source,bash]
+sudo docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
+
+=== Java
 . set JASYPT_KEY=keyacademy as enviromental variable and export it
+[source,bash]
+----
+mvn clean package
+java -jar target/everteacher-0.0.1.jar
+----
+
+== How to use
+=== Web page
+`http://localhost:8081/`
+
 . Log as Tomek Borek to get teacher's privileges (username: Tomek_Borek, password: Borek)
 . To log as student, you need to add group of students, sign them to course (see above) and then log as Nika Veronika(username: Nika_Veronika, password: Veronika)
 
-=== Docker image
-. docker run -p 8081:8081 -e JASYPT_KEY=keyacademy pawelkorniak/everteacher
+=== Postman
+`http://localhost:8081/api`
+
+To see all end-points use swagger:
+`http://localhost:8081/swagger-ui/`
+
+
 
