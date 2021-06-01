@@ -13,11 +13,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/*/finish/**", "/*/unfinish/**").hasRole("STUDENT")
-                .antMatchers("/", "/*/block/**", "/*/unblock/**", "/list","/api/**").hasRole("TEACHER")
-               // .anyRequest().permitAll()
+                .antMatchers("/", "/*/block/**", "/*/unblock/**", "/list", "/api/**").hasRole("TEACHER")
+                // .anyRequest().permitAll()
                 .and()
                 .formLogin().defaultSuccessUrl("/students", true)
                 .and().csrf().disable();
-        ;
     }
 }

@@ -22,13 +22,13 @@ class CourseController {
     }
 
     @PostMapping
-    ResponseEntity<Course> saveCourse(@RequestParam("course")MultipartFile multipartFile){
+    ResponseEntity<Course> saveCourse(@RequestParam("course") MultipartFile multipartFile) {
         Course course = null;
         try {
             course = courseService.saveCourseFromFile(new String(multipartFile.getBytes()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(course,HttpStatus.CREATED);
+        return new ResponseEntity<>(course, HttpStatus.CREATED);
     }
 }

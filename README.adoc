@@ -37,8 +37,13 @@ Our awesome application helps in the supervising the course flow.
 using POST method with 1 parameter:
 +
 * key="group" value=".../resources/AcademyX.txt" as form-data
+.. add course `http://localhost:808/api/courses`
++
+using POST method with 1 parameter:
++
+* key="course" value=".../resources/course.txt" as form-data
 .. sign group of students to the course
-`http://localhost:8081/api/courses`
+`http://localhost:8081/api/groups/<groupId>/sign-to-course/<courseId>`
 +
 using POST method with 1 parameter:
 +

@@ -4,11 +4,9 @@ import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.MultipartFilter;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +25,7 @@ public class GroupOfStudentsController {
     }
 
     @PostMapping
-    ResponseEntity<GroupOfStudents> save(@RequestParam("group") MultipartFile multipartFile){
+    ResponseEntity<GroupOfStudents> save(@RequestParam("group") MultipartFile multipartFile) {
         byte[] multipartFileBytes = new byte[0];
         try {
             multipartFileBytes = multipartFile.getBytes();
@@ -40,7 +38,7 @@ public class GroupOfStudentsController {
 
     @PostMapping("add-group-with-course")
     ResponseEntity<GroupOfStudents> saveGroupWithCourse(@RequestParam("group") MultipartFile multipartFileGroup,
-                                                        @RequestParam("course")MultipartFile multipartFileCourse) {
+                                                        @RequestParam("course") MultipartFile multipartFileCourse) {
         byte[] groupFileBytes = new byte[0];
         byte[] courseFileBytes = new byte[0];
 

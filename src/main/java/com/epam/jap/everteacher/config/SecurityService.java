@@ -1,7 +1,6 @@
 package com.epam.jap.everteacher.config;
 
 import com.epam.jap.everteacher.student.StudentService;
-import com.epam.jap.everteacher.exceptions.UserNotFoundException;
 import com.epam.jap.everteacher.teacher.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.pmw.tinylog.Logger;
@@ -27,7 +26,7 @@ public class SecurityService implements UserDetailsService {
             Logger.error(e.getMessage());
             user = teacherService.findByLogin(login);
         }
-        if (user==null) throw new UsernameNotFoundException(login);
+        if (user == null) throw new UsernameNotFoundException(login);
         return user;
     }
 }

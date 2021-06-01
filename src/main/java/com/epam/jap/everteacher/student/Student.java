@@ -59,7 +59,7 @@ public class Student implements UserDetails {
         int numberOfTopics = topicListPerSuperTopic.size();
         topicListPerSuperTopic.retainAll(finishedTopics);
         int numberOfFinishedTopics = topicListPerSuperTopic.size();
-        return numberOfFinishedTopics*100/numberOfTopics;
+        return numberOfFinishedTopics * 100 / numberOfTopics;
     }
 
     public boolean hasFinishedTopic(String topicName) {

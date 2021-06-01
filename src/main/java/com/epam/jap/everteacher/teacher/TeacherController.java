@@ -1,11 +1,8 @@
 package com.epam.jap.everteacher.teacher;
 
-import com.epam.jap.everteacher.student.StudentService;
 import com.epam.jap.everteacher.syllabus.Course;
 import com.epam.jap.everteacher.syllabus.CourseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,19 +24,19 @@ class TeacherController {
 
     @GetMapping
     ResponseEntity<List<Teacher>> findAllTeachers() {
-        return new ResponseEntity<>(teacherService.findAllTeachers(),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.findAllTeachers(), HttpStatus.OK);
     }
 
     @GetMapping("{teacherId}")
     ResponseEntity<Teacher> findById(@PathVariable Long teacherId) {
-        return new ResponseEntity<>(teacherService.findById(teacherId),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.findById(teacherId), HttpStatus.OK);
     }
 
     @PostMapping("{teacherId}/sign-to-course/{courseId}")
     ResponseEntity<Teacher> signTeacherToCourse(@PathVariable Long teacherId, @PathVariable Long courseId) {
         Course course = courseService.findById(courseId);
         Teacher teacher = teacherService.findById(teacherId);
-        return new ResponseEntity<>(teacherService.signTeacherToCourse(teacher,course),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.signTeacherToCourse(teacher, course), HttpStatus.OK);
     }
 
 //    @GetMapping("hello")
